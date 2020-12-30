@@ -4,13 +4,14 @@
 int main(){
     Gameboard game;
     bool finish = 0;
+    char winner = '-';
     int row;
     int column;
     int count = 0;
     int max_turns = 8;
     
-    finish = checkIfWinner(game);
     while(count<max_turns){
+    finish = game.checkIfWinner();
         if(finish == 0){
             count += 1;
             std::cout << "\n\n\nX player:\n- Enter row:\n";
@@ -26,7 +27,8 @@ int main(){
             game.printInfo();
         }
         else{
-            std::cout<<"Game Won";
+            winner = game.getWinner();
+            std::cout<<"\n\nGame Won by Player "<<winner;
             break;
         }
     }
