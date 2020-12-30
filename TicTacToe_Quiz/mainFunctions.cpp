@@ -2,6 +2,8 @@
 #include <iostream>
 #include "mainClasses.cpp"
 
+
+//These are currently unused - TODO: Clean up and make better use of this file
 int checkIfWinner(Gameboard game);
 int checkHorizontal(Gameboard game);
 int checkVertical(Gameboard game);
