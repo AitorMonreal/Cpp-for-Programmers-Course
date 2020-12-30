@@ -36,9 +36,10 @@ char Gameboard::getGameSpace(int row, int column){
 }
 
 char Gameboard::checkHorizontal(){
-    int sum = 0;
+    int sum;
     char winner = '-';
     for(int i=0; i<4; i++){
+        sum = 0;
         if(getGameSpace(i, 0) == '-'){
             continue;
         }
@@ -55,16 +56,16 @@ char Gameboard::checkHorizontal(){
 }
 
 char Gameboard::checkVertical(){
-    int sum = 0;
+    int sum;
     char winner = '-';
     for(int j=0; j<4; j++){
+        sum = 0;
         if(getGameSpace(0, j) == '-'){
             continue;
         }
         for(int i=0; i<3; j++){
             if(getGameSpace(i, j) == getGameSpace(i+1, j)){
                 sum += 1;
-                }
             }
         }
         if(sum == 3){
@@ -75,25 +76,29 @@ char Gameboard::checkVertical(){
 }
 
 char Gameboard::checkDiagonalTop(){
-    char winner;
+    int sum = 0;
+    char winner = '-';
     for(int i=0; i<3; i++){
-        if(game.getGameSpace(i, i) != game.getGameSpace(i+1, i+1)){
-            finish = 0;
-            break;
-            std::cout<<"checkDiagonalTop";
+        if(getGameSpace(i, i) == getGameSpace(i+1, i+1)){
+            sum += 1;
         }
+    }
+    if(sum == 3){
+        winner = getGameSpace(0, 0);
     }
     return winner;
 }
 
 char Gameboard::checkDiagonalBottom(){
+    int sum = 0;
     char winner;
     for(int i=0; i<3; i++){
-        if(game.getGameSpace(4-i, i) != game.getGameSpace(4-(i+1), i+1)){
-            finish = 0;
-            break;
-            std::cout<<"checkDiagonalBottom";
+        if(game.getGameSpace(4-i, i) == game.getGameSpace(4-(i+1), i+1)){
+            sum += 1;
         }
+    }
+    if(sum == 3){
+        winner = getGameSpace(0, 0);
     }
     return winner;
 }
