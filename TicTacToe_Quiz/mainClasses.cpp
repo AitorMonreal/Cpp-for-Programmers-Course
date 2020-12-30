@@ -93,7 +93,7 @@ char Gameboard::checkDiagonalBottom(){
     int sum = 0;
     char winner;
     for(int i=0; i<3; i++){
-        if(game.getGameSpace(4-i, i) == game.getGameSpace(4-(i+1), i+1)){
+        if(getGameSpace(4-i, i) == getGameSpace(4-(i+1), i+1)){
             sum += 1;
         }
     }
@@ -105,9 +105,12 @@ char Gameboard::checkDiagonalBottom(){
 
 bool Gameboard::checkIfWinner(){
     bool win_outcome = 0;
-    horizontal_win = (checkHorizontal!='-');
-    vertical_win = (checkVertical!='-');
-    diagonal_win = ((checkDiagonalTop!='-') | (checkDiagonalBottom!='-'));
+    bool horizontal_win;
+    bool vertical_win;
+    bool diagonal_win;
+    horizontal_win = (checkHorizontal()!='-');
+    vertical_win = (checkVertical()!='-');
+    diagonal_win = ((checkDiagonalTop()!='-') | (checkDiagonalBottom()!='-'));
     if(horizontal_win | vertical_win | diagonal_win){
         win_outcome = 1;
     }
@@ -116,13 +119,19 @@ bool Gameboard::checkIfWinner(){
 
 char Gameboard::getWinner(){
     char winner = '-';
-    if(checkHorizontal!='-'){
-        winner = checkHorizontal;
+    if(checkHorizontal()!='-'){
+        winner = checkHorizontal();
     }
-    else if(checkVertical!='-'){
-        winner = checkVertical;
+    else if(checkVertical()!='-'){
+        winner = checkVertical();
     }
-    else if
+    else if(checkDiagonalTop()!='-'){
+        winner = checkDiagonalTop();
+    }
+    else if(checkDiagonalBottom()!='-'){
+        winner = checkDiagonalBottom();
+    }
+    return winner;
 }
 
 void Gameboard::printInfo(){
