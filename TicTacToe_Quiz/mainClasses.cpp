@@ -115,7 +115,14 @@ bool Gameboard::checkIfWinner(){
 }
 
 char Gameboard::getWinner(){
-    
+    char winner = '-';
+    if(checkHorizontal!='-'){
+        winner = checkHorizontal;
+    }
+    else if(checkVertical!='-'){
+        winner = checkVertical;
+    }
+    else if
 }
 
 void Gameboard::printInfo(){
