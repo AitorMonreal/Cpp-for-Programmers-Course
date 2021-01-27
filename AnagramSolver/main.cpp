@@ -4,7 +4,8 @@
 
 void ReorderString(std::string& word)
 {
-	int wordLength = 0, i, j;
+	int wordLength = 0;
+	int i, j;
 	char temp;
 	//std::sort(word.begin(), word.end());
 	for (std::string::iterator it = word.begin(); it != word.end(); ++it)
