@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <array>
+#include <map>
+#include <vector>
 
 constexpr int s_Length = 6;
 
@@ -59,5 +61,25 @@ int main()
 	for (int i = 0; i < s_Length; i++) {
 		std::cout << wordList[i] << "\n";
 	}
+	
+	//std::map<char, std::string> sortedWordsMap{ std::make_pair(wordList[0][0], wordList[0]) };
+	std::vector<std::string> vectorWord = { wordList[0] };
+	std::map<char, std::vector<std::string>> sortedWordsMap{ std::make_pair(wordList[0][0], vectorWord) };
+
+	for (const std::string& word : wordList)  // const auto& is used because you're not modifying word. This also avoid making deep-copies of word - this is generally ok for ints or doubles because making copies is cheap, but this is not the case for strings, for instance.
+	{
+		bool present = false;
+		for (const auto& element : sortedWordsMap)
+		{
+			if (element.first == word[0])
+				present = true;
+		}
+		if (present == false)
+			sortedWordsMap.insert(std::pair<char, std::vector<std::string>>(word[0], { word }));
+	}
+	std::cout << "MAP:\n\n";
+	for (const auto& element : sortedWordsMap)
+		std::cout << element.first << "      " << element.second[0] << "\n";
+
 	std::cin.get();
 }
