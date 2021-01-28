@@ -48,6 +48,15 @@ void InsertionSort(std::string& word, int* ptrLength) {
 	//std::cout << word;
 }
 
+std::ostream& operator<<(std::ostream& stream, const std::vector<std::string>& wordVector)
+{
+	std::vector<std::string>::const_iterator it;
+	for (it = wordVector.begin(); it != wordVector.end(); it++)
+		stream << *it << ", ";
+	stream << "endvector\n";
+	return stream;
+}
+
 int main()
 {
 	//static const int s_Length = 6;
@@ -63,29 +72,34 @@ int main()
 	}
 	
 	//std::map<char, std::string> sortedWordsMap{ std::make_pair(wordList[0][0], wordList[0]) };
-	std::vector<std::string> vectorWord = { wordList[0] };
-	std::map<char, std::vector<std::string>> sortedWordsMap{ std::make_pair(wordList[0][0], vectorWord) };
+	//std::vector<std::string> wordVector({ wordList[0] });
+	//std::map<char, std::vector<std::string>> sortedWordsMap{ std::make_pair(wordList[0][0], wordVector) };
 	
-	int i = 0;
+	std::map<char, std::vector<std::string>> sortedWordsMap;
+	std::vector<std::string> wordVector({ wordList[0] });
+
+	int elementIndex;
 	for (const std::string& word : wordList)  // const auto& is used because you're not modifying word. This also avoid making deep-copies of word - this is generally ok for ints or doubles because making copies is cheap, but this is not the case for strings, for instance.
 	{
+		elementIndex = 0;
 		bool present = false;
 		for (const auto& element : sortedWordsMap)
 		{
-			i += 1;
 			if (element.first == word[0])
 			{
 				present = true;
-				sortedWordsMap[i].push_back(word);
+				sortedWordsMap[elementIndex].push_back(word);
+				wordVector = element.second;
 			}
-				
+			elementIndex += 1;
 		}
 		if (present == false)
 			sortedWordsMap.insert(std::pair<char, std::vector<std::string>>(word[0], { word }));
 	}
 	std::cout << "MAP:\n\n";
 	for (const auto& element : sortedWordsMap)
-		std::cout << element.first << "      " << element.second[0] << "\n";
+		std::cout << std::vector<std::string>(element.second);
+		//std::cout << element.first << "      " << std::vector<std::string>(element.second) << "\n";
 
 	std::cin.get();
 }
