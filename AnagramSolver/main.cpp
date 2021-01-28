@@ -65,14 +65,20 @@ int main()
 	//std::map<char, std::string> sortedWordsMap{ std::make_pair(wordList[0][0], wordList[0]) };
 	std::vector<std::string> vectorWord = { wordList[0] };
 	std::map<char, std::vector<std::string>> sortedWordsMap{ std::make_pair(wordList[0][0], vectorWord) };
-
+	
+	int i = 0;
 	for (const std::string& word : wordList)  // const auto& is used because you're not modifying word. This also avoid making deep-copies of word - this is generally ok for ints or doubles because making copies is cheap, but this is not the case for strings, for instance.
 	{
 		bool present = false;
 		for (const auto& element : sortedWordsMap)
 		{
+			i += 1;
 			if (element.first == word[0])
+			{
 				present = true;
+				sortedWordsMap[i].push_back(word);
+			}
+				
 		}
 		if (present == false)
 			sortedWordsMap.insert(std::pair<char, std::vector<std::string>>(word[0], { word }));
