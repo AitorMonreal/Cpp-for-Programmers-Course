@@ -2,4 +2,4 @@
 
 Example Output Terminal:
 
-![](Terminal_screenshot_1.png)
+![](terminal_screenshot_1.png)
